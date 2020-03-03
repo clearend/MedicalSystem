@@ -28,7 +28,7 @@ public class Record {
     /**
      * token
      */
-    private  String token;
+    private  String userId;
 
     /**
      * 病人姓名

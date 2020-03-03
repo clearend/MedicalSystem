@@ -19,7 +19,7 @@ public class RecordService {
 
     /**
      * 录入病例
-     * @param token
+     * @param userId
      * @param patientName
      * @param gender
      * @param age
@@ -32,20 +32,20 @@ public class RecordService {
      * @param prescription
      * @throws Exception
      */
-    public void fillRecord(String token, String patientName, Integer gender, Integer age, Long phoneNumber, String allergyHistory, String symptom, String medicalHistory, String initialDiagnosis, String confirmedResult, String prescription) throws Exception {
-         User user = userRepository.findByToken(token);
+    public void fillRecord(String userId, String patientName, Integer gender, Integer age, Long phoneNumber, String allergyHistory, String symptom, String medicalHistory, String initialDiagnosis, String confirmedResult, String prescription) throws Exception {
+         User user = userRepository.findByUserId(userId);
          Record record = new Record();
         if(record!=null)
         {
             try {
-                record.setToken(token);
+                record.setUserId(userId);
                 record.setRecordNumber("AS"+System.currentTimeMillis());
-                record.setHospital(userRepository.findByToken(token).getWorkUnit());
-                record.setUserName(userRepository.findByToken(token).getUserName());
+                record.setHospital(userRepository.findByUserId(userId).getWorkUnit());
+                record.setUserName(userRepository.findByUserId(userId).getUserName());
                 record.setPatientName(patientName);
                 record.setGender(gender);
                 record.setAge(age);
-                record.setDepartment(userRepository.findByToken(token).getDepartment());
+                record.setDepartment(userRepository.findByUserId(userId).getDepartment());
                 record.setPhoneNumber(phoneNumber);
                 record.setAllergyHistory(allergyHistory);
                 record.setSymptom(symptom);

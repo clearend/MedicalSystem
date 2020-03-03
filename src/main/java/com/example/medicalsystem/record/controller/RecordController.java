@@ -34,7 +34,7 @@ public class RecordController {
      */
     @RequestMapping(value = "fillRecord",method = RequestMethod.POST)
     public ApiResponse fillRecord(
-            @RequestParam(value = "token") String token,
+            @RequestParam(value = "userId") String userId,
             @RequestParam(value = "patientName") String patientName,
             @RequestParam(value = "gender") Integer gender,
             @RequestParam(value = "age") Integer age,
@@ -47,7 +47,7 @@ public class RecordController {
             @RequestParam(value = "prescription") String prescription
     ){
         try {
-            recordService.fillRecord(token,patientName,gender,age,phoneNumber,allergyHistory,symptom,medicalHistory,initialDiagnosis,confirmedResult,prescription);
+            recordService.fillRecord(userId,patientName,gender,age,phoneNumber,allergyHistory,symptom,medicalHistory,initialDiagnosis,confirmedResult,prescription);
         }catch (Exception e){
             return ApiResponse.error(e.getMessage());
         }
