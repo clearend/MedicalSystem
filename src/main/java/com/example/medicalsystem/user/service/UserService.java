@@ -8,6 +8,8 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -160,5 +162,10 @@ public class UserService {
         }else{
             throw new Exception("用户名不存在");
         }
+    }
+
+    public List<User> searchUser() {
+        List<User> users = new ArrayList<>();
+        return users;
     }
 }

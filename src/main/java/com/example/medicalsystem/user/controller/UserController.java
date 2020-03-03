@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.medicalsystem.user.service.UserService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("user")
@@ -158,4 +159,36 @@ public class UserController {
 
         return ApiResponse.success(userService.changePassword(token,newPassword));
     }
+
+
+    /**
+     * 上传肺音
+     * @return
+     */
+    @RequestMapping(value = "uploadVoice",method = RequestMethod.POST)
+    public ApiResponse uploadVoice(
+    ){
+        return ApiResponse.success();
+    }
+
+    @RequestMapping(value = "searchUser",method = RequestMethod.POST)
+    public ApiResponse<List<User>> searchUser(
+            @RequestParam(value = "userTypeId",required = false) String userTypeId,
+            @RequestParam(value = "userId",required = false) String userId,
+            @RequestParam(value = "userName",required = false) String userName,
+            @RequestParam(value = "gender",required = false) int gender,
+            @RequestParam(value = "workUnit",required = false) String workUnit,
+            @RequestParam(value = "age",required = false) int age,
+            @RequestParam(value = "position",required = false) String position,
+            @RequestParam(value = "department",required = false) String department
+    ){
+        List<User> users;
+        try {
+            users = userService.searchUser();
+        }catch (Exception e) {
+            return ApiResponse.error(e.getMessage());
+        }
+        return ApiResponse.success(users);
+    }
+
 }

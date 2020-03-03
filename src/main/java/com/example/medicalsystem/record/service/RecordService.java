@@ -7,6 +7,8 @@ import com.example.medicalsystem.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 
@@ -78,5 +80,32 @@ public class RecordService {
             e.printStackTrace();
             throw new Exception("病例查询失败");
         }
+    }
+
+    public List<Record> searchRecord(String patientName, Long startTime, Long endTime, int gender, String doctorId, String doctorName, int startAge, int endAge, String hospital, String department, String recordNumber) {
+        List<String> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+        List<Long> list3 = new ArrayList<>();
+        List<Record> records;
+        list1.add(patientName);
+        list1.add(doctorId);
+        list1.add(doctorName);
+        list1.add(patientName);
+        list1.add(hospital);
+        list1.add(department);
+        list1.add(recordNumber);
+        list2.add(gender);
+        list2.add(startAge);
+        list2.add(endAge);
+        list3.add(startTime);
+        list3.add(endTime);
+        System.out.println("=============");
+        for (int i = 0; i < list1.size(); i++) {
+            System.out.println(list1.get(i));
+        }
+        System.out.println("=================");
+        records = recordRepository.findAll();
+        return records;
+
     }
 }
