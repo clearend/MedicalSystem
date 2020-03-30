@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="utf-8">
+	<title>智音医疗系统</title>
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<style type="text/css">
+		body{
+			margin: 0;
+			overflow: hidden;
+			background-image: url("img/index01.png");
+		}
+		.welcome{
+			margin: 0 auto;
+			width: 980px;
+			height: 450px;
+		}
+		.pic{
+			background-image: url("img/index03.png"),url("img/index02.png");
+			background-size: 80%,100%;
+			background-position: center,center;
+			background-repeat: no-repeat;
+			height: 100%;
+			width: 50%;
+			display: inline-block;
+			text-align: center;
+			vertical-align: middle;
+			border-top-left-radius: 15px;
+			border-bottom-left-radius: 15px;
+			box-shadow: 1px 1px 20px #ccc;
+			float: left;
+		}
+		.inputArea{
+			width: 49%;
+			height: 100%;
+			background-color: white;
+			border-top-right-radius: 15px;
+			border-bottom-right-radius: 15px;
+			box-shadow: 1px 1px 20px #ccc;
+			background-repeat: no-repeat;
+			display: inline-block;
+			vertical-align: middle;
+			text-align: center;
+		}
+		.title{
+			font-size: 28px;
+			font-weight: 600;
+			margin-top: 10%;
+		}
+		.box input{
+			width: 55%;
+			height: 20px;
+			line-height: 20px;
+			margin: 0 auto;
+			border-radius: 30px;
+			border: 2px solid rgb(225,225,225);
+			padding: 12px 16px;
+			padding-left: 50px;
+			outline:none;
+			margin-top: 30px;
+			color: grey;
+			font-size: 16px;
+		}
+
+		input::-webkit-input-placeholder{
+			color:#bfbfbf;
+		}
+		#username{
+			background-image: url(img/icon_user.png);
+			background-repeat: no-repeat;
+			background-position: 15px 10px;
+			background-size: 22px;
+		}
+		#password{
+			background-image: url(img/icon_pd.png);
+			background-repeat: no-repeat;
+			background-position: 16px 9px;
+			background-size: 18px;
+		}
+		.btn{
+			background-color: rgb(8,141,239);
+			color: white;
+			width: 69%;
+			height: 48px;
+			border: 0;
+			border-radius: 30px;
+			margin-top: 30px;
+			outline: none;
+			font-size: 16px;
+			cursor: pointer;
+		}
+		.btn:hover{
+			background-color: rgb(7, 204, 239);
+			color: white;
+
+		}
+		.tip{
+			width: 65%;
+			margin: 20px auto;
+		}
+		.word{
+			margin: 0 auto;
+			font-size: 12px;
+			color: grey;
+			padding: 6px;
+			border-bottom: 2px solid rgb(225,225,225);
+			width: 50px;
+			display: inline-block;
+			cursor: pointer;
+		}
+		.word:hover{
+			border-bottom: 2px solid rgb(8,141,239);
+			color: rgb(8,141,239);
+
+		}
+
+
+	</style>
+
+</head>
+<body>
+	<div style="height: 150px;width: 100%;">
+	</div>
+	<div class="welcome">
+		<div class="pic">
+		</div>
+		<div class="inputArea">
+			<div class="title">
+				<span>智音</span><br/>
+				<span>欢迎使用</span>
+			</div>
+			<div class="box">
+				<div style="display: inline-block;width: 100%">
+					<input id="username" autocomplete="off" placeholder="用户名"/>
+				</div>
+				<div style="display: inline-block;width: 100%">
+					<input id="password" type="password" autocomplete="off" placeholder="密码"/>
+				</div>
+				<div style="display: inline-block;width: 100%;">
+					<button class="btn" onclick="login()">登 录</button>
+				</div>
+				<div class="tip">
+					<div class="word" style="float: left">
+						忘记密码
+					</div >
+					<div class="word" style="float: right" onclick="window.location.href='registe.html'">
+						注册
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+
+	document.body.onselectstart = function() {
+		return false;
+	};
+
+	function login() {
+		//请求接口
+		//跳转到用户主页（医生、个人、管理员）
+		window.location.href ='patient.html';
+
+	}
+</script>
+</html>

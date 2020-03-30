@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>系统中心</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+    <script type="text/javascript" src="js/layui.all.js"></script>
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .top{
+            height: 80px;
+            background-color: rgb(8,141,239);
+            color: white;
+            width: 100%;
+            vertical-align: center;
+        }
+        .name{
+            font-weight: 700;
+            font-size: 24px;
+            line-height:80px;
+            margin-left: 50px;
+        }
+        .left{
+            background-color: rgb(53,52,65);
+            height: 900px;
+            width: 13%;
+            display: inline-block;
+            float: left;
+        }
+        .list{
+            height: 60px;
+            line-height: 60px;
+            background-color: rgb(53,52,65);
+            cursor: pointer;
+        }
+        .sublist{
+            height: 60px;
+            line-height: 60px;
+            background-color: rgba(110, 110, 110, 0.23);
+            cursor: pointer;
+        }
+        .sublist:hover{
+            background-color: black;
+        }
+        .content{
+            color: white;
+            margin-left: 10%;
+            font-size: 14px;
+        }
+        .right{
+            display: inline-block;
+            width: 87%;
+            height: 900px;
+            background-image: url("img/main.png");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            vertical-align: top;
+            background-position: bottom;
+        }
+        .top_right{
+            float: right;
+            height: 80px;
+            line-height: 80px;
+        }
+        .odd,.even{
+            text-align: center;
+            line-height: 25px;
+        }
+        .odd{
+            background-color: rgb(241,243,244)!important;
+        }
+        .note{
+            width: 400px;
+            text-align: left;
+        }
+
+        #teaListTable_wrapper{
+            margin: 10px 5%;
+            width: 80%;
+        }
+        tbody{
+            font-size: 14px;
+        }
+        #teaListTable{
+            padding-top: 10px;
+            font-size: 16px;
+        }
+        .toolbar{
+            float: right;
+        }
+        #add-main{
+            margin-top: 20px;
+        }
+        #add-form{
+            margin: auto;
+            width: 80%;
+        }
+        #edit-main{
+            margin: 20px auto;
+            width: 80%;
+        }
+        table.dataTable tbody td{
+            padding: 10px 12px;
+        }
+        #res_img{
+            width: 500px;
+            margin-left: 400px;
+        }
+        .layui-input-block input{
+            width: 80%!important;
+        }
+        .layui-input-block textarea{
+            width: 80%!important;
+        }
+        .layui-tree-txt:hover{
+            background-color: rgb(8,141,239);
+            color: white;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="top">
+        <div style="height: 80px;line-height: 90px;display: inline-block">
+            <img src="img/title.png" style="margin-left: 40px;margin-top: 5px"/>
+        </div>
+        <div class="top_right">
+            <div style="display: inline-block;color: white;margin-right: 20px;cursor: pointer">
+                <img src="img/top_icon3.png" style="vertical-align: middle"/>
+                <div style="vertical-align: center;display: inline-block">消息</div>
+            </div>
+            <div style="display: inline-block;color: white;margin-right: 20px;cursor: pointer">
+                <img src="img/top_icon1.png" style="vertical-align: middle"/>
+                <div style="vertical-align: center;display: inline-block">待办</div>
+            </div>
+            <div style="display: inline-block;color: white;margin-right: 20px;cursor: pointer">
+                <img src="img/user.png" style="vertical-align: middle"/>
+                <div style="vertical-align: center;display: inline-block">超级管理员</div>
+                <img src="img/top_icon4.png" style="vertical-align: middle;width: 18px"/>
+            </div>
+        </div>
+    </div>
+    <div class="left">
+        <!--        诊断系统-->
+        <div class="list" style="background-color: black" id="list1">
+            <div class="content" onclick="change()">
+                <img src="img/left4.png" style="display: inline-block;vertical-align: middle" />
+                <div style="color: white;display: inline-block;vertical-align: middle;margin-left: 15px">
+                    系统首页
+                </div>
+<!--                <img id="img1" src="img/add.png" style="display: inline-block;vertical-align: middle;width: 10px;margin-left: 35%" />-->
+            </div>
+        </div>
+        <!--        下拉列表-->
+<!--        <div id="sub1" style="display: none">-->
+<!--            <div class="sublist" onclick="search()" id="search">-->
+<!--                <div class="content">-->
+<!--                    <div style="color: white;display: inline-block;vertical-align: middle;margin-left: 40px">-->
+<!--                        病例查询-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="sublist">-->
+<!--                <div class="content">-->
+<!--                    <div style="color: white;display: inline-block;vertical-align: middle;margin-left: 40px">-->
+<!--                        音频诊断-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="sublist">-->
+<!--                <div class="content">-->
+<!--                    <div style="color: white;display: inline-block;vertical-align: middle;margin-left: 40px">-->
+<!--                        症状确诊-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <!--        数据输入-->
+        <div class="list" id="list2">
+            <div class="content">
+                <img src="img/left1.png" style="display: inline-block;vertical-align: middle" />
+                <div style="color: white;display: inline-block;vertical-align: middle;margin-left: 15px">
+                    音频分析
+                </div>
+                <img src="img/add.png" style="display: inline-block;vertical-align: middle;width: 10px;margin-left: 35%" />
+            </div>
+        </div>
+        <!--        远程服务-->
+        <div class="list" id="list3" onclick="faraway()">
+            <div class="content">
+                <img src="img/left3.png" style="display: inline-block;vertical-align: middle" />
+                <div style="color: white;display: inline-block;vertical-align: middle;margin-left: 15px">
+                    远程服务
+                </div>
+                <img src="img/add.png" style="display: inline-block;vertical-align: middle;width: 10px;margin-left: 35%" />
+            </div>
+        </div>
+        <!--        医患交流-->
+        <div class="list" id="list4" onclick="communicate()">
+            <div class="content">
+                <img src="img/left2.png" style="display: inline-block;vertical-align: middle" />
+                <div style="color: white;display: inline-block;vertical-align: middle;margin-left: 15px">
+                    医患交流
+                </div>
+                <img src="img/add.png" style="display: inline-block;vertical-align: middle;width: 10px;margin-left: 36%" />
+            </div>
+        </div>
+        <!--        系统管理-->
+        <div class="list">
+            <div class="content" id="list5">
+                <img src="img/top_icon2.png" style="display: inline-block;vertical-align: middle" />
+                <div style="color: white;display: inline-block;vertical-align: middle;margin-left: 15px">
+                    系统管理
+                </div>
+                <img src="img/add.png" style="display: inline-block;vertical-align: middle;width: 10px;margin-left: 35%" />
+            </div>
+        </div>
+
+    </div>
+    <div class="right">
+        <div id="bingli" style="display: block;">
+            <div class="layui-card-header" style="height: 60px;line-height: 60px;background-color: rgb(241,243,244)">首页-病例列表</div>
+            <table id="teaListTable" style="margin-top: 5px">
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>诊室</th>
+                    <th style="text-align: center">病情简述</th>
+                    <th>患者姓名</th>
+                    <th>诊断医师</th>
+                    <th>更新时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div id="analyze" style="display: none">
+            <div class="layui-col-md12">
+                <div class="layui-card" style="box-shadow: unset">
+                    <div class="layui-card-header" style="height: 60px;line-height: 60px;background-color: rgb(241,243,244)">音频文件上传</div>
+                    <div class="layui-card-body">
+                        <div class="layui-upload">
+                            <button type="button" class="layui-btn layui-btn-normal" id="test-upload-testList">选择音频</button>
+                            <div class="layui-upload-list">
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr><th>文件名</th>
+                                        <th>大小</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr></thead>
+                                    <tbody id="test-upload-demoList"></tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="layui-btn" id="test-upload-testListAction">上传分析</button>
+                        </div>
+                    </div>
+                    <div class="layui-card-header" style="height: 60px;line-height: 60px;background-color: rgb(241,243,244)">音频曲线</div>
+                    <div id="res_img" style="height: 180px;line-height: 180px">
+                        <img src="img/res.png" />
+                    </div>
+                    <div class="layui-card-header" style="height: 60px;line-height: 60px;background-color: rgb(241,243,244)">分析结果</div>
+                    <label class="layui-form-label" style="margin-top: 20px;margin-left: 160px" >病情判断：</label>
+                    <div class="layui-input-block" style="width: 70%;margin-top: 20px">
+                        <textarea name="other" placeholder="" class="layui-textarea"></textarea>
+                    </div>
+                    <div style="margin-left: 38%;margin-top: 20px">
+                        <button class="layui-btn layui-btn-warm" onclick="edit()">填入病例</button>
+<!--                        <button class="layui-btn layui-btn-normal" style="margin-left: 20px" onclick="edit()">编辑病例</button>-->
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div id="communicate" style="display: none"> 
+            <div class="layui-card-header" style="height: 60px;line-height: 60px;background-color: rgb(241,243,244)">医患交流中心</div>
+            <div style="float: right;margin-right: 50px;margin-top: 20px">
+                <button class="layui-btn layui-btn-normal" style="margin-right: 900px">消息分类</button>
+                <button class="layui-btn layui-btn-warm">我的消息</button>
+                <button class="layui-btn layui-btn-primary" style="margin-right: 20px">我的回答</button>
+                <input type="text" name=""/ style="height: 32px">
+                <button class="layui-btn layui-btn-normal">搜索</button>
+            </div>
+            <img src="./img/communicate.png" style="margin-left: 120px;margin-top: 20px" />
+        </div>
+        <div id="faraway" style="display: none">
+            <div id="test1" class="demo-tree demo-tree-box"></div>
+                <div class="layui-card-header" style="height: 60px;line-height: 60px;background-color: rgb(241,243,244)">远程服务</div>
+                <div style="margin-left: 15px;height: 40px;font-size: 20px;margin-top: 20px" >
+                    医院列表
+                    <button class="layui-btn layui-btn-normal" style="margin-left: 100px" >更新列表</button>
+                    <span style="margin-left: 20px">病例详情</span>
+                    <div style="font-size: 14px;width: 50%;float: right;margin-right: 20%;margin-top: 50px">
+                    <div class="layui-form-item center" >
+                        <label class="layui-form-label" style="width: 40px" >姓名<span style="color: red;"> *</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" required style="width: 260px" lay-verify="required" placeholder="请输入患者姓名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 40px">性别<span style="color: red;"> *</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="type" required  style="width: 260px" lay-verify="required" placeholder="请输入患者性别" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 40px">年龄<span style="color: red;"> *</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者年龄" autocomplete="off" class="layui-input">
+                            <!-- <input type="hidden" name="id" style="width: 240px" autocomplete="off" class="layui-input"> -->
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 40px">电话<span style="color: red;"> *</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                            <!-- <input type="hidden" name="id" style="width: 240px" autocomplete="off" class="layui-input"> -->
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 40px">主诉<span style="color: red;"> *</span></label>
+                        <div class="layui-input-block">
+                            <textarea  name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者主诉" autocomplete="off" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 60px">过敏史<span style="color: red;"> *</span></label>
+                        <div class="layui-input-block">
+                            <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者过敏史" autocomplete="off" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 40px">病史</label>
+                        <div class="layui-input-block">
+                            <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者病史" autocomplete="off" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 40px">备注</label>
+                        <div class="layui-input-block">
+                            <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入备注信息" autocomplete="off" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-warm" style="margin-left: 160px" >联系医院</button>
+                            <button type="reset" class="layui-btn " id="closeBtn" style="margin-left: 60px" onclick="create()">下载肺音</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div id="test13" class="demo-tree-more" style="font-size: 16px;width:18%;border-right: 1px solid grey;height: 700px;overflow: auto"></div>
+        </div>
+    </div>
+    <div id="add-main" style="display: none;">
+        <form class="layui-form" id="add-form"  action="">
+            <div class="layui-form-item center" >
+                <label class="layui-form-label" style="width: 40px" >姓名<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" required style="width: 260px" lay-verify="required" placeholder="请输入患者姓名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 40px">性别<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="type" required  style="width: 260px" lay-verify="required" placeholder="请输入患者性别" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 40px">年龄<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者年龄" autocomplete="off" class="layui-input">
+                    <!-- <input type="hidden" name="id" style="width: 240px" autocomplete="off" class="layui-input"> -->
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 40px">电话<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                    <!-- <input type="hidden" name="id" style="width: 240px" autocomplete="off" class="layui-input"> -->
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 40px">主诉<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <textarea  name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者主诉" autocomplete="off" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 60px">过敏史<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者过敏史" autocomplete="off" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 40px">病史</label>
+                <div class="layui-input-block">
+                    <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者病史" autocomplete="off" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 40px">备注</label>
+                <div class="layui-input-block">
+                    <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入备注信息" autocomplete="off" class="layui-textarea"></textarea>
+                </div>
+            </div>
+<!--            <div class="layui-form-item">-->
+<!--                <label class="layui-form-label" style="width: 90px;padding:0 10px 10px 10px;">上传音频文件</label>-->
+<!--                <div class="layui-input-inline uploadHeadImage" style="width: 260px">-->
+<!--                    <div class="layui-upload-drag" id="uploadFile" style="padding: 20px">-->
+<!--                        <i class="layui-icon"></i>-->
+<!--                        <p>点击上传文件或将文件拖拽到此处！</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="layui-input-inline">-->
+<!--                    <div id="uploadResult" class="layui-upload-list">-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="save" style="margin-left: 50px" >创建</button>
+                    <button type="reset" class="layui-btn layui-btn-primary" id="closeBtn" style="margin-left: 60px" onclick="create()">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="edit-main" style="display: none;">
+        <form class="layui-form" id="edit-form"  action="">
+            <div class="layui-form-item center" >
+                <label class="layui-form-label" style="width: 40px" >姓名<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" required style="width: 260px" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" disabled="disabled" value="张三">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 40px">性别<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="type" required  style="width: 260px" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" disabled="disabled" value="男">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 40px">年龄<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" disabled="disabled" value="35岁">
+                    <!-- <input type="hidden" name="id" style="width: 240px" autocomplete="off" class="layui-input"> -->
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 40px">电话<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" disabled="disabled" value="12345678901">
+                    <!-- <input type="hidden" name="id" style="width: 240px" autocomplete="off" class="layui-input"> -->
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 40px">主诉<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <textarea  name="value" required  style="width: 260px" lay-verify="required" placeholder="" autocomplete="off" class="layui-textarea" disabled="disabled">这是主诉</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 60px">过敏史<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="" autocomplete="off" class="layui-textarea" disabled="disabled">无</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 40px">病史</label>
+                <div class="layui-input-block">
+                    <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="" autocomplete="off" class="layui-textarea" disabled="disabled">无</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 40px">备注</label>
+                <div class="layui-input-block">
+                    <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="" autocomplete="off" class="layui-textarea" disabled="disabled">这是备注</textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 70px">音频结果<span style="color: red;"> *</span></label>
+                <div class="layui-input-block">
+                    <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="" autocomplete="off" class="layui-textarea" disabled="disabled">音频结果</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 70px">确诊结果<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <textarea type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="" autocomplete="off" class="layui-textarea" ></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="margin-left: 160px">
+                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="save" style="margin-left: 50px" >确认存档</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+<script>
+    var tree = layui.tree;
+
+data1 = [{
+    title: '北京地区'
+    ,id: 2
+    ,children: [{
+      title: '北京协和医院'
+      ,id: 2000
+      ,children:[{
+        title:'病例-001  &nbsp;&nbsp;<small style="color:#666">2019-11-20</small> &nbsp;&nbsp;>',
+        id:20001
+      },{
+         title:'病例-002  &nbsp;&nbsp;<small style="color:#666">2019-11-22</small> &nbsp;&nbsp;>',
+        id:20002
+      },{
+         title:'病例-002  &nbsp;&nbsp;<small style="color:#666">2019-11-23</small> &nbsp;&nbsp;>',
+        id:20003
+      }]
+    },{
+      title: '北京大学第三医院'
+      ,id: 2001,
+      children:[{
+        title:'病例-001  &nbsp;&nbsp;<small style="color:#666">2019-11-23</small>',
+        id:20011
+      },{
+        title:'病例-002  &nbsp;&nbsp;<small style="color:#666">2019-11-20</small>',
+        id:20012
+      }]
+    }]
+  },{
+    title: '天津地区'
+    ,id: 3
+    ,children: [{
+      title: '天津市北辰医院'
+      ,id: 3000
+    },{
+      title: '天津市第一医院'
+      ,id: 3001
+    },{
+      title: '天津医科大学附属医院'
+      ,id: 3001
+    }]
+  },{
+    title: '河北地区'
+    ,id: 2
+    ,children: [{
+      title: '河北省中医医院'
+      ,id: 2000
+    },{
+      title: '石家庄第一医院'
+      ,id: 2001
+    }]
+  },]
+      tree.render({
+        elem: '#test13'
+        ,data: data1
+        ,showLine: false  //是否开启连接线
+      });
+
+    $(document).ready(function(){
+        $('#myTable').DataTable();
+    });
+
+    function faraway(){
+        $("#list1").css("background-color","rgb(53, 52, 65)");
+        $("#list2").css("background-color","rgb(53, 52, 65)");
+        $("#list4").css("background-color","rgb(53, 52, 65)");
+        $("#list5").css("background-color","rgb(53, 52, 65)");
+        $("#list3").css("background-color","black");
+        $("#bingli").css("display","none");
+        $("#analyze").css("display","none");
+        $("#communicate").css("display","none");
+        $("#faraway").css("display","block");
+        $(".right").css("background-image","url(\"img/bg.png\")");
+    }
+
+    function communicate(){
+        $("#list1").css("background-color","rgb(53, 52, 65)");
+        $("#list2").css("background-color","rgb(53, 52, 65)");
+        $("#list3").css("background-color","rgb(53, 52, 65)");
+        $("#list5").css("background-color","rgb(53, 52, 65)");
+        $("#list4").css("background-color","black");
+        $("#bingli").css("display","none");
+        $("#communicate").css("display","block");
+        $("#faraway").css("display","none");
+        $("#analyze").css("display","none");
+        $(".right").css("background-image","url(\"img/bg.png\")");
+    }
+
+    function create() {
+        // layer.closeAll();
+
+        //ajax
+        //success回调
+        layer.msg('病例创建中', {
+            icon: 16
+            ,shade: 0.01
+        });
+        layer.confirm('是否立即上传音频文件？', function(index){
+            layer.close(index);
+            layer.closeAll();
+            $("#bingli").css("display","none");
+            $("#list1").css("background-color","rgb(53,52,65)");
+            $("#list2").css("background-color","black");
+            $("#analyze").css("display","block");
+            $(".right").css("background-image","none");
+
+        });
+
+    }
+
+    // layui.use('upload', function() {
+    //     var upload = layui.upload;
+    //
+    //     //执行上传
+    //     var uploadInst = upload.render({
+    //         elem: '#uploadFile', //绑定元素
+    //         url: '', //上传接口
+    //         method: 'POST',
+    //         auto: false,
+    //         accept: 'file',
+    //         bindAction: '#uploadBtn',
+    //         size: 10240,//限制文件大小10M
+    //         multiple: false,
+    //         data:{},
+    //
+    //         before: function(obj) {
+    //             layer.load();
+    //             this.data.title = $('#title').val();
+    //         },
+    //
+    //         done: function(data, index, upload) {//上传完毕回调
+    //             layer.closeAll('loading');
+    //
+    //             if (data.no === 1) {
+    //                 layer.msg("上传成功！", {
+    //                     icon: 6
+    //                 });
+    //             } else {
+    //                 layer.msg("上传失败，请稍后重试！", {
+    //                     icon: 5
+    //                 });
+    //             }
+    //
+    //             var uuid = data.uuid;
+    //
+    //             $("#uploadResult").append('<input readonly type="text" value="'+uuid+'" class="layui-input" />');
+    //         }
+    //         , error: function() {//请求异常回调
+    //             layer.closeAll('loading');
+    //             layer.msg('网络异常，请稍后重试！');
+    //         }
+    //     });
+    // });
+
+    //文件上传
+    var demoListView = $('#test-upload-demoList')
+        ,uploadListIns =  layui.upload.render({
+        elem: '#test-upload-testList'
+        ,url: '/upload/'
+        ,accept: 'file'
+        ,multiple: true
+        ,auto: false
+        ,bindAction: '#test-upload-testListAction'
+        ,choose: function(obj){
+            var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            //读取本地文件
+            obj.preview(function(index, file, result){
+                var tr = $(['<tr id="upload-'+ index +'">'
+                    ,'<td>'+ file.name +'</td>'
+                    ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+                    ,'<td>等待上传</td>'
+                    ,'<td>'
+                    ,'<button class="layui-btn layui-btn-mini test-upload-demo-reload layui-hide">重传</button>'
+                    ,'<button class="layui-btn layui-btn-mini layui-btn-danger test-upload-demo-delete">删除</button>'
+                    ,'</td>'
+                    ,'</tr>'].join(''));
+
+                //单个重传
+                tr.find('.test-upload-demo-reload').on('click', function(){
+                    obj.upload(index, file);
+                });
+
+                //删除
+                tr.find('.test-upload-demo-delete').on('click', function(){
+                    delete files[index]; //删除对应的文件
+                    tr.remove();
+                    uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                });
+
+                demoListView.append(tr);
+            });
+        }
+        ,done: function(res, index, upload){
+            if(res.code == 0){ //上传成功
+                var tr = demoListView.find('tr#upload-'+ index)
+                    ,tds = tr.children();
+                tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                tds.eq(3).html(''); //清空操作
+                return delete this.files[index]; //删除文件队列已经上传成功的文件
+            }
+            this.error(index, upload);
+        }
+        ,error: function(index, upload){
+            var tr = demoListView.find('tr#upload-'+ index)
+                ,tds = tr.children();
+            tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+            tds.eq(3).find('.test-upload-demo-reload').removeClass('layui-hide'); //显示重传
+        }
+    });
+
+
+    //新建病例弹窗
+    function notice(){
+
+        layer.open({
+            type: 1
+            ,title: '新建病例'
+            ,closeBtn: 1
+            ,area: ['700px','800px']
+            ,shade: 0.7
+            ,id: 'LAY' //设定一个id，防止重复弹出
+            ,btnAlign: 'c'
+            ,moveType: 1 //拖拽模式，0或者1
+            ,content: $("#add-main")
+            ,success: function(layero){
+                var btn = layero.find('.layui-layer-btn');
+                btn.find('.layui-layer-btn0').attr({
+                });
+            }
+        });
+    }
+
+    //编辑病例弹窗
+    function edit() {
+
+        layer.open({
+            type: 1
+            ,title: '编辑病例'
+            ,closeBtn: 1
+            ,area: ['700px','800px']
+            ,shade: 0.7
+            ,id: 'LAY1' //设定一个id，防止重复弹出
+            ,btnAlign: 'c'
+            ,moveType: 1 //拖拽模式，0或者1
+            ,content: $("#edit-main")
+            ,success: function(layero){edit
+                var btn = layero.find('.layui-layer-btn');
+                btn.find('.layui-layer-btn0').attr({
+                });
+            }
+        });
+
+    }
+    var data = [
+        {
+        "NUM": "0001",
+        "ROOM": "内科室",
+        "NOTE": " 典型症状为突然寒战、高热，体温高达39℃～40℃，呈稽留热型，伴有头痛、全身肌肉酸软、纳...",
+        "NAME": "张三",
+        "DOC": "李医生",
+        "TIME": "2019-10-20"
+        },
+        {
+            "NUM": "0002",
+            "ROOM": "内科室",
+            "NOTE": " 典型症状为突然寒战、高热，体温高达39℃～40℃，呈稽留热型，伴有头痛、全身肌肉酸软、纳差，酸软、纳差...",
+            "NAME": "张三",
+            "DOC": "李医生",
+            "TIME": "2019-10-20"
+        },
+        {
+            "NUM": "0003",
+            "ROOM": "内科室",
+            "NOTE": " 典型症状为突然寒战、高热，体温高达39℃～40℃，呈稽留热型，伴有头痛、全身肌肉酸软、纳差，酸软、纳差...",
+            "NAME": "张三",
+            "DOC": "李医生",
+            "TIME": "2019-10-20"
+        },
+        {
+            "NUM": "0004",
+            "ROOM": "内科室",
+            "NOTE": " 典型症状为突然寒战、高热，体温高达39℃～40℃，呈稽留热型，伴有头痛、全身肌肉酸软、纳差，酸软、纳差...",
+            "NAME": "张三",
+            "DOC": "李医生",
+            "TIME": "2019-10-20"
+        },
+        {
+            "NUM": "0003",
+            "ROOM": "内科室",
+            "NOTE": " 典型症状为突然寒战、高热，体温高达39℃～40℃，呈稽留热型，伴有头痛、全身肌肉酸软、纳差，酸软、纳差...",
+            "NAME": "张三",
+            "DOC": "李医生",
+            "TIME": "2019-10-20"
+        },
+
+        {
+            "NUM": "0003",
+            "ROOM": "内科室",
+            "NOTE": " 典型症状为突然寒战、高热，体温高达39℃～40℃，呈稽留热型，伴有头痛、全身肌肉酸软、纳差，酸软、纳差...",
+            "NAME": "张三",
+            "DOC": "李医生",
+            "TIME": "2019-10-20"
+        },];
+    $('#teaListTable').DataTable({
+        "dom": 'l <"div.toolbar"> tip',
+        "stateSave": true,
+        "searching" : false,
+        "ordering": false,
+        "destroy" : true,
+        "processing": true,
+        "data":data,
+        "columns" : [
+            {
+                data:"NUM"
+            },
+            {
+                data:"ROOM"
+            },
+            {
+                data:"NOTE",
+                class:"note"
+            },
+            {
+                data:"NAME"
+            },
+            {
+                data:"DOC"
+            },
+            {
+                data:"TIME"
+            },
+            {
+                data:null
+            }
+        ],
+        "columnDefs": [
+            {
+                "render" : function(data, type, row, meta){
+                    var html = '<button type="button" class="layui-btn layui-btn-warm" style="height:32px;line-height:32px">查看</button>'+'&nbsp;<button type="button" class="layui-btn layui-btn-danger" style="height:32px;line-height:32px">删除</button>';
+                    return html;
+                },
+                "targets" : 6
+            }
+        ],
+
+        language : {
+            "processing" : "处理中...",
+            "lengthMenu" : "显示 _MENU_ 项结果",
+            "zeroRecords" : "没有匹配结果",
+            "info" : "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+            "infoEmpty" : "显示第 0 至 0 项结果，共 0 项",
+            "infoFiltered" : "(由 _MAX_ 项结果过滤)",
+            "infoPostFix" : "",
+            "search" : "搜索:",
+            "url" : "",
+            "emptyTable" : "没有数据",
+            "loadingRecords" : "载入中...",
+            "infoThousands" : "20",
+            "paginate" : {
+                "first" : "首页",
+                "previous" : "上页",
+                "next" : "下页",
+                "last" : "末页"
+            }
+        }
+    });
+
+    $("div.toolbar").html('&nbsp;<button type="button" class="layui-btn layui-btn-normal"  style="height:32px;line-height:32px" onclick="notice()">新建病例</button>');
+    $("div.toolbar").append('&nbsp;<button type="button" class="layui-btn "  style="height:32px;line-height:32px">批量修改权限</button>');
+
+    document.body.onselectstart = function() {
+        return false;
+    };
+    var i=0;
+    function change() {
+    
+        $("#list4").css("background-color","rgb(53, 52, 65)");
+        $("#list2").css("background-color","rgb(53, 52, 65)");
+        $("#list1").css("background-color","black");
+        $("#bingli").css("display","block");
+        $("#analyze").css("display","none");
+        $("#communicate").css("display","none");
+        $(".right").css("background-image","url(\"img/main.png\")");
+    }
+    function search() {
+        $("#bingli").css("display","block");
+        $("#search").css("background-color","black");
+    }
+
+</script>
+</html>

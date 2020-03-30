@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>智音医疗系统-医生端</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="layui/css/layui.css?t=1579039349486" media="all">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <style>
+        .layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after{
+            background-color:#1E9FFF;
+        }
+        .layui-nav-tree .layui-nav-bar{
+            background-color:#1E9FFF;
+        }
+        .layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{
+            background-color:#1E9FFF;
+        }
+        .layui-body{
+            width:100%;
+            left: 0;
+        }
+        .layui-table-view{
+            margin: 0;
+        }
+        .layui-elem-quote{
+            border-left: 5px solid #1E9FFF;
+            padding: 12px;
+        }
+        .layui-form-item{
+            margin-left: 40px;
+        }
+    </style>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" style="color:#1E9FFF;font-weight: 600;font-size: 22px">智音医疗系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="#">数据分析</a></li>
+            <li class="layui-nav-item"><a href="#">问题反馈</a></li>
+            <li class="layui-nav-item"><a href="#">联系管理员</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">版权说明</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                    <dd><a href="">帮助</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="img/patient.png" class="layui-nav-img">
+                    用户名
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="doc_userinfo.html">个人中心</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="index.html">注销</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">病例管理</a>
+                    <dl class="layui-nav-child">
+                        <dd class="layui-this" ><a href="doctor.html">病例表</a></dd>
+                        <dd><a href="doc_upload.html">肺音分析</a></dd>
+                        <dd><a href="doc_final.html">最终病例</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">远程医疗</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">远程病例</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body" style="bottom: 34px;margin-left: 200px;width: 87%;">
+        <!-- 内容主体区域 -->
+<!--        <div style="width: 100%;height: 30px;line-height: 30px;font-weight: 600;font-size: 20px">病例表</div>-->
+        <blockquote class="layui-elem-quote" style="margin-bottom: 0">病例表</blockquote>
+        <table class="layui-hide" id="test" lay-filter="test" style="margin-top: 0px"></table>
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-sm" lay-event="getCheckData">查看详情</button>
+<!--                <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">选中数目</button>-->
+                <button class="layui-btn layui-btn-sm" onclick="notice()">新建病例</button>
+            </div>
+        </script>
+        <script type="text/html" id="barDemo">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="voice" >肺音</a>
+        </script>
+
+        <div id="add-main" style="display: none;z-index: 1;!important;" >
+            <form class="layui-form" id="add-form"  action="">
+                <div class="layui-form-item center" >
+                    <label class="layui-form-label" style="width: 40px" >姓名<span style="color: red;"> *</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" required style="width: 260px" lay-verify="required" placeholder="请输入患者姓名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 40px">性别<span style="color: red;"> *</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="type" required  style="width: 260px" lay-verify="required" placeholder="请输入患者性别" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 40px">年龄<span style="color: red;"> *</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者年龄" autocomplete="off" class="layui-input">
+                        <!-- <input type="hidden" name="id" style="width: 240px" autocomplete="off" class="layui-input"> -->
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 40px">电话<span style="color: red;"> *</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                        <!-- <input type="hidden" name="id" style="width: 240px" autocomplete="off" class="layui-input"> -->
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 40px">主诉<span style="color: red;"> *</span></label>
+                    <div class="layui-input-block">
+                        <textarea  name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者主诉" autocomplete="off" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 60px">过敏史<span style="color: red;"> *</span></label>
+                    <div class="layui-input-block">
+                        <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者过敏史" autocomplete="off" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 40px">病史</label>
+                    <div class="layui-input-block">
+                        <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者病史" autocomplete="off" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 40px">备注</label>
+                    <div class="layui-input-block">
+                        <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入备注信息" autocomplete="off" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <!--            <div class="layui-form-item">-->
+                <!--                <label class="layui-form-label" style="width: 90px;padding:0 10px 10px 10px;">上传音频文件</label>-->
+                <!--                <div class="layui-input-inline uploadHeadImage" style="width: 260px">-->
+                <!--                    <div class="layui-upload-drag" id="uploadFile" style="padding: 20px">-->
+                <!--                        <i class="layui-icon"></i>-->
+                <!--                        <p>点击上传文件或将文件拖拽到此处！</p>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <div class="layui-input-inline">-->
+                <!--                    <div id="uploadResult" class="layui-upload-list">-->
+
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--            </div>-->
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="save" style="margin-left: 50px" >创建</button>
+                        <button type="reset" class="layui-btn layui-btn-primary" id="closeBtn" style="margin-left: 60px" onclick="create()">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="layui-footer" style="line-height: 34px;height: 34px;color:rgba(255,255,255,.7);background-color: #23262E;left: 0;padding: 0;text-align: center">
+        <!-- 底部固定区域 -->
+        © 智音 -- 基于深度学习的肺病辅助诊断平台
+    </div>
+</div>
+<script src="layui/layui.js?t=1579039349486" charset="utf-8"></script>
+<script src="layui/layui.all.js" charset="utf-8"></script>
+<script>
+
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            ,url:'/MedicalSystem/data/demo.json'
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                ,layEvent: 'LAYTABLE_TIPS'
+                ,icon: 'layui-icon-tips'
+            }]
+            ,title: '用户数据表'
+            ,cols: [[
+                {type: 'checkbox', fixed: 'left'}
+                ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
+                ,{field:'username', title:'患者姓名', width:120, edit: 'text'}
+                ,{field:'doctor', title:'诊断医生', width:120, edit: 'text'}
+                ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
+                ,{field:'old', title:'年龄', width:80, edit: 'text', sort: true}
+                ,{field:'sign', title:'症状'}
+                ,{field:'ip', title:'音频上传', width:80}
+                ,{field:'joinTime', title:'诊断时间', width:120,sort:true}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
+            ]]
+            ,page: true
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：'+ data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选': '未全选');
+                    break;
+
+                //自定义头工具栏右侧图标 - 提示
+                case 'LAYTABLE_TIPS':
+                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                    break;
+            };
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                window.location.href = "doc_final.html"
+            }
+            else if(obj.event === 'voice'){
+                layer.confirm('是否上传或查看肺音？', function(index){
+                    window.location.href="doc_upload.html"
+                });
+            }
+        });
+    });
+
+
+    //新建病例弹窗
+    function notice(){
+
+        layer.open({
+            type: 1
+            ,title: '新建病例'
+            ,closeBtn: 1
+            ,area: ['500px','650px']
+            ,shade: 0
+            ,id: 'LAY' //设定一个id，防止重复弹出
+            ,btnAlign: 'c'
+            ,moveType: 1 //拖拽模式，0或者1
+            ,content: $("#add-main")
+            ,success: function(layero){
+                var btn = layero.find('.layui-layer-btn');
+                btn.find('.layui-layer-btn0').attr({
+                });
+            }
+        });
+    }
+
+    //编辑病例弹窗
+    function edit() {
+
+        layer.open({
+            type: 1
+            ,title: '编辑病例'
+            ,closeBtn: 1
+            ,area: ['700px','800px']
+            ,shade: 0.7
+            ,id: 'LAY1' //设定一个id，防止重复弹出
+            ,btnAlign: 'c'
+            ,moveType: 1 //拖拽模式，0或者1
+            ,content: $("#edit-main")
+            ,success: function(layero){edit
+                var btn = layero.find('.layui-layer-btn');
+                btn.find('.layui-layer-btn0').attr({
+                });
+            }
+        });
+
+    }
+
+    function change(s){
+        $("#if").attr("src",s);
+    }
+
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?d214947968792b839fd669a4decaaffc";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</body>
+</html>
