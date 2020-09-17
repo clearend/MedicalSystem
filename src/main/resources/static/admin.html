@@ -66,18 +66,18 @@
                     <dl class="layui-nav-child">
                         <dd class="layui-this" ><a href="javascript:" onclick=change("user_doctor.html")>医生</a></dd>
                         <dd><a href="javascript:" onclick=change("user_patient.html")>病人</a></dd>
-                        <dd><a href="javascript:" onclick=change("user_admin.html")>管理员</a></dd>
+<!--                        <dd><a href="javascript:" onclick=change("user_admin.html")>管理员</a></dd>-->
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">病例管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">院内病例</a></dd>
-                        <dd><a href="javascript:;">远程病例</a></dd>
+                        <dd><a href="javascript:;" onclick=change("user_patient.html")>院内病例</a></dd>
+                        <dd><a href="javascript:;" onclick=change("user_patient.html")>远程病例</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="">数据统计</a></li>
-                <li class="layui-nav-item"><a href="">系统设置</a></li>
+<!--                <li class="layui-nav-item"><a href="">数据统计</a></li>-->
+<!--                <li class="layui-nav-item"><a href="">系统设置</a></li>-->
             </ul>
         </div>
     </div>
@@ -87,7 +87,7 @@
         <div style="padding: 15px;">
             用户管理
         </div>
-        <iframe id="if" style="width: 100%; min-height: 550px;" scrolling="no"  src="user_doctor.html"></iframe>
+        <iframe id="if" style="width: 100%; min-height: 550px;border: 0px" scrolling="no"  src="user_doctor.html"></iframe>
     </div>
 
     <div class="layui-footer">

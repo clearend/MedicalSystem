@@ -2,9 +2,176 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>管理端-病人</title>
+    <link rel="stylesheet" href="layui/css/layui.css?t=1579039349486" media="all">
+    <script src="js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
-patient
+<table class="layui-hide" id="test" lay-filter="test" style="margin-top: 0px"></table>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">查看详情</button>
+        <!--                <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">选中数目</button>-->
+<!--        <button class="layui-btn layui-btn-sm" onclick="notice()">新建病例</button>-->
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+<!--    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="voice" >肺音</a>-->
+</script>
+
+<div id="add-main" style="display: none;z-index: 1;!important;" >
+    <form class="layui-form" id="add-form"  action="">
+        <div class="layui-form-item center" >
+            <label class="layui-form-label" style="width: 40px" >姓名<span style="color: red;"> *</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="name" required style="width: 260px" lay-verify="required" placeholder="请输入患者姓名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 40px">性别<span style="color: red;"> *</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="type" required  style="width: 260px" lay-verify="required" placeholder="请输入患者性别" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 40px">年龄<span style="color: red;"> *</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者年龄" autocomplete="off" class="layui-input">
+                <!-- <input type="hidden" name="id" style="width: 240px" autocomplete="off" class="layui-input"> -->
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 40px">电话<span style="color: red;"> *</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                <!-- <input type="hidden" name="id" style="width: 240px" autocomplete="off" class="layui-input"> -->
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 40px">主诉<span style="color: red;"> *</span></label>
+            <div class="layui-input-block">
+                <textarea  name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者主诉" autocomplete="off" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 60px">过敏史<span style="color: red;"> *</span></label>
+            <div class="layui-input-block">
+                <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者过敏史" autocomplete="off" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 40px">病史</label>
+            <div class="layui-input-block">
+                <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者病史" autocomplete="off" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 40px">备注</label>
+            <div class="layui-input-block">
+                <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入备注信息" autocomplete="off" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <!--            <div class="layui-form-item">-->
+        <!--                <label class="layui-form-label" style="width: 90px;padding:0 10px 10px 10px;">上传音频文件</label>-->
+        <!--                <div class="layui-input-inline uploadHeadImage" style="width: 260px">-->
+        <!--                    <div class="layui-upload-drag" id="uploadFile" style="padding: 20px">-->
+        <!--                        <i class="layui-icon"></i>-->
+        <!--                        <p>点击上传文件或将文件拖拽到此处！</p>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--                <div class="layui-input-inline">-->
+        <!--                    <div id="uploadResult" class="layui-upload-list">-->
+
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="save" style="margin-left: 50px" >创建</button>
+                <button type="reset" class="layui-btn layui-btn-primary" id="closeBtn" style="margin-left: 60px" onclick="create()">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="layui/layui.js?t=1579039349486" charset="utf-8"></script>
+<script src="layui/layui.all.js" charset="utf-8"></script>
+
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            ,url:'/MedicalSystem/data/patient.json'
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                ,layEvent: 'LAYTABLE_TIPS'
+                ,icon: 'layui-icon-tips'
+            }]
+            ,title: '用户数据表'
+            ,cols: [[
+                {type: 'checkbox', fixed: 'left'}
+                ,{field:'id', title:'ID', fixed: 'left', unresize: true, sort: true}
+                ,{field:'username', title:'姓名', edit: 'text'}
+                ,{field:'sex', title:'性别',edit: 'text', sort: true}
+                ,{field:'old', title:'年龄',edit: 'text', sort: true}
+                ,{field:'phone', title:'电话', edit: 'text'}
+                ,{field:'ip', title:'音频上传', }
+                ,{field:'joinTime', title:'注册时间', sort:true}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
+            ]]
+            ,page: true
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：'+ data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选': '未全选');
+                    break;
+
+                //自定义头工具栏右侧图标 - 提示
+                case 'LAYTABLE_TIPS':
+                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                    break;
+            };
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                window.location.href = "doc_final.html"
+            }
+            else if(obj.event === 'voice'){
+                layer.confirm('是否上传或查看肺音？', function(index){
+                    window.location.href="doc_upload.html"
+                });
+            }
+        });
+    });
+</script>
+
+
 </body>
 </html>

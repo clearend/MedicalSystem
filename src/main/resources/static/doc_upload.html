@@ -85,7 +85,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">远程医疗</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">远程病例</a></dd>
+                        <dd><a href="doc_remote.html">远程病例</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -112,7 +112,7 @@
                 </table>
             </div>
             <button type="button" class="layui-btn" id="testListAction">开始上传</button>
-            <button type="button" class="layui-btn" id="analyze">分析音频</button>
+            <button type="button" class="layui-btn" id="analyze" onclick="myOpen()">分析音频</button>
         </div>
 
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
@@ -120,10 +120,15 @@
         </fieldset>
 
         <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">诊断结论</label>
-            <div class="layui-input-block" >
-
-                <textarea style="width: 80%" disabled placeholder="上传并分析肺音，此处展示诊断结果" class="layui-textarea"></textarea>
+            <label class="layui-form-label">肺音波形</label>
+            <div id="space" style="width: 100%;height: 40px">
+            </div>
+            <div id="feiyin" style="display: none">
+                <img src="./img/feiyin.png" style="width: 600px;height: 200px">
+            </div>
+            <label class="layui-form-label" style="margin-top: 20px">诊断结论</label>
+            <div class="layui-input-block" style="margin-top: 20px">
+                <textarea id="result" style="width: 80%" disabled placeholder="上传并分析肺音，此处展示诊断结果" class="layui-textarea"></textarea>
                 <button onclick="window.location.href = 'doc_final.html'" type="button" class="layui-btn" style="margin-top: 20px">填入病例</button>
             </div>
         </div>
@@ -137,6 +142,34 @@
 <script src="layui/layui.js?t=1579039349486" charset="utf-8"></script>
 <script src="layui/layui.all.js" charset="utf-8"></script>
 <script>
+
+    //弹窗
+    function myOpen() {
+
+        layer.load(1, {
+            shade: [0.4, '#000'], //0.5透明度的灰色背景
+            content: '分析中',
+            success: function (layero) {
+                layero.find('.layui-layer-content').css({
+                    'padding-top': '39px',
+                    'width': '60px',
+                    "color": "#FFFFFF"
+                });
+            }
+        });
+        setTimeout(function(){
+            layer.closeAll();  //可以是一句或是很多句代码，也可以是个函数
+            document.getElementById("feiyin").style.display = "block"
+            document.getElementById("space").style.display = "none"
+            document.getElementById("result").innerText= "哮喘"
+            layer.confirm('音频分析成功！请在结果处查看', {
+                btn: ['确定'] //按钮
+            }, function(index){
+                layer.close(index)
+            });
+        },2000);　　　　//延时2秒
+
+    }
 
     //图片轮播
     layui.carousel.render({

@@ -13,24 +13,24 @@
     <link rel="stylesheet" href="layui/css/layui.css?t=1579039349486" media="all">
     <script src="js/jquery-3.4.1.min.js"></script>
     <style>
-        .layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after{
-            background-color:#1E9FFF;
+        .layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after {
+            background-color: #1E9FFF;
         }
-        .layui-nav-tree .layui-nav-bar{
-            background-color:#1E9FFF;
+        .layui-nav-tree .layui-nav-bar {
+            background-color: #1E9FFF;
         }
-        .layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{
-            background-color:#1E9FFF;
+        .layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a, .layui-nav-tree .layui-this > a:hover {
+            background-color: #1E9FFF;
         }
-        .layui-body{
-            width:100%;
+        .layui-body {
+            width: 100%;
             left: 0;
         }
-        .layui-timeline-axis{
+        .layui-timeline-axis {
             color: #1E9FFF;
         }
-        .layui-elem-quote{
-            border-left: 5px solid  #1E9FFF;
+        .layui-elem-quote {
+            border-left: 5px solid #1E9FFF;
         }
     </style>
 </head>
@@ -66,67 +66,73 @@
             <li class="layui-nav-item"><a href="index.html">注销</a></li>
         </ul>
     </div>
-
     <div class="layui-body" style="bottom: 34px">
         <!-- 内容主体区域 -->
-<!--        <div style="width: 100%;height: 30px;line-height: 30px;font-weight: 600;font-size: 20px">病例表</div>&ndash;&gt;-->
+        <!--        <div style="width: 100%;height: 30px;line-height: 30px;font-weight: 600;font-size: 20px">病例表</div>&ndash;&gt;-->
         <blockquote class="layui-elem-quote" style="margin-bottom: 0">肺音提交记录</blockquote>
         <table class="layui-hide" id="test" lay-filter="test" style="margin-top: 0px"></table>
         <script type="text/html" id="barDemo">
             <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
         </script>
-
-        <div id="add-main" style="display: none;z-index: 1;!important;" >
-            <form class="layui-form" id="add-form"  action="">
-                <div class="layui-form-item center" >
-                    <label class="layui-form-label" style="width: 40px" >姓名<span style="color: red;"> *</span></label>
+        <div id="add-main" style="display: none;z-index: 1;!important;">
+            <form class="layui-form" id="add-form" action="">
+                <div class="layui-form-item center">
+                    <label class="layui-form-label" style="width: 40px">姓名<span style="color: red;"> *</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="name" required style="width: 260px" lay-verify="required" placeholder="请输入患者姓名" autocomplete="off" class="layui-input">
+                        <input type="text" name="name" required style="width: 260px" lay-verify="required"
+                               placeholder="请输入患者姓名" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="width: 40px">性别<span style="color: red;"> *</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="type" required  style="width: 260px" lay-verify="required" placeholder="请输入患者性别" autocomplete="off" class="layui-input">
+                        <input type="text" name="type" required style="width: 260px" lay-verify="required"
+                               placeholder="请输入患者性别" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="width: 40px">年龄<span style="color: red;"> *</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者年龄" autocomplete="off" class="layui-input">
+                        <input type="text" name="value" required style="width: 260px" lay-verify="required"
+                               placeholder="请输入患者年龄" autocomplete="off" class="layui-input">
                         <!-- <input type="hidden" name="id" style="width: 240px" autocomplete="off" class="layui-input"> -->
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="width: 40px">电话<span style="color: red;"> *</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                        <input type="text" name="value" required style="width: 260px" lay-verify="required"
+                               placeholder="请输入联系电话" autocomplete="off" class="layui-input">
                         <!-- <input type="hidden" name="id" style="width: 240px" autocomplete="off" class="layui-input"> -->
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="width: 40px">主诉<span style="color: red;"> *</span></label>
                     <div class="layui-input-block">
-                        <textarea  name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者主诉" autocomplete="off" class="layui-textarea"></textarea>
+                        <textarea name="value" required style="width: 260px" lay-verify="required" placeholder="请输入患者主诉"
+                                  autocomplete="off" class="layui-textarea"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="width: 60px">过敏史<span style="color: red;"> *</span></label>
                     <div class="layui-input-block">
-                        <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者过敏史" autocomplete="off" class="layui-textarea"></textarea>
+                        <textarea name="value" required style="width: 260px" lay-verify="required"
+                                  placeholder="请输入患者过敏史" autocomplete="off" class="layui-textarea"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="width: 40px">病史</label>
                     <div class="layui-input-block">
-                        <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入患者病史" autocomplete="off" class="layui-textarea"></textarea>
+                        <textarea name="value" required style="width: 260px" lay-verify="required" placeholder="请输入患者病史"
+                                  autocomplete="off" class="layui-textarea"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="width: 40px">备注</label>
                     <div class="layui-input-block">
-                        <textarea name="value" required  style="width: 260px" lay-verify="required" placeholder="请输入备注信息" autocomplete="off" class="layui-textarea"></textarea>
+                        <textarea name="value" required style="width: 260px" lay-verify="required" placeholder="请输入备注信息"
+                                  autocomplete="off" class="layui-textarea"></textarea>
                     </div>
                 </div>
                 <!--            <div class="layui-form-item">-->
@@ -139,23 +145,24 @@
                 <!--                </div>-->
                 <!--                <div class="layui-input-inline">-->
                 <!--                    <div id="uploadResult" class="layui-upload-list">-->
-
                 <!--                    </div>-->
                 <!--                </div>-->
                 <!--            </div>-->
-
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="save" style="margin-left: 50px" >创建</button>
-                        <button type="reset" class="layui-btn layui-btn-primary" id="closeBtn" style="margin-left: 60px" onclick="create()">重置</button>
+                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="save"
+                                style="margin-left: 50px">创建
+                        </button>
+                        <button type="reset" class="layui-btn layui-btn-primary" id="closeBtn" style="margin-left: 60px"
+                                onclick="create()">重置
+                        </button>
                     </div>
                 </div>
             </form>
         </div>
-
     </div>
-
-        <div class="layui-footer" style="line-height: 34px;height: 34px;color:rgba(255,255,255,.7);background-color: #23262E;left: 0;padding: 0;text-align: center">
+    <div class="layui-footer"
+         style="line-height: 34px;height: 34px;color:rgba(255,255,255,.7);background-color: #23262E;left: 0;padding: 0;text-align: center">
         <!-- 底部固定区域 -->
         © 智音 -- 基于深度学习的肺病辅助诊断平台
     </div>
@@ -163,126 +170,114 @@
 <script src="layui/layui.js?t=1579039349486" charset="utf-8"></script>
 <script src="layui/layui.all.js" charset="utf-8"></script>
 <script>
-
-    layui.use('table', function(){
+    layui.use('table', function () {
         var table = layui.table;
-
         table.render({
             elem: '#test'
-            ,url:'/MedicalSystem/data/note.json'
-            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-            ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+            , url: './data/note.json'
+            , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            , defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
                 title: '提示'
-                ,layEvent: 'LAYTABLE_TIPS'
-                ,icon: 'layui-icon-tips'
+                , layEvent: 'LAYTABLE_TIPS'
+                , icon: 'layui-icon-tips'
             }]
-            ,title: '用户数据表'
-            ,cols: [[
+            , title: '用户数据表'
+            , cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-                ,{field:'username', title:'用户名', width:120, edit: 'text'}
-                ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
-                ,{field:'old', title:'年龄', width:80, edit: 'text', sort: true}
-                ,{field:'sign', title:'症状'}
-                ,{field:'ip', title:'音频', width:80}
-                ,{field:'joinTime', title:'上传时间', width:120,sort:true}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
+                , {field: 'id', title: 'ID', width: 80, fixed: 'left', unresize: true, sort: true}
+                , {field: 'username', title: '用户名', width: 120, edit: 'text'}
+                , {field: 'sex', title: '性别', width: 80, edit: 'text', sort: true}
+                , {field: 'old', title: '年龄', width: 80, edit: 'text', sort: true}
+                , {field: 'sign', title: '症状'}
+                , {field: 'ip', title: '音频', width: 80}
+                , {field: 'joinTime', title: '上传时间', width: 120, sort: true}
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 180}
             ]]
-            ,page: true
+            , page: true
         });
-
-
         //监听行工具事件
-        table.on('tool(test)', function(obj){
+        table.on('tool(test)', function (obj) {
             var data = obj.data;
             //console.log(obj)
-            if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
+            if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
                     obj.del();
                     layer.close(index);
                 });
-            } else if(obj.event === 'edit'){
+            } else if (obj.event === 'edit') {
                 window.location.href = "doc_final.html"
-            }
-            else if(obj.event === 'voice'){
-                layer.confirm('是否上传或查看肺音？', function(index){
-                    window.location.href="doc_upload.html"
+            } else if (obj.event === 'voice') {
+                layer.confirm('是否上传或查看肺音？', function (index) {
+                    window.location.href = "doc_upload.html"
                 });
             }
         });
     });
-
 </script>
 <script>
     var _hmt = _hmt || [];
-    (function() {
+    (function () {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?d214947968792b839fd669a4decaaffc";
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
-
     var demoListView = $('#demoList')
-        ,uploadListIns = layui.upload.render({
+        , uploadListIns = layui.upload.render({
         elem: '#testList'
-        ,url: 'https://httpbin.org/post' //改成您自己的上传接口
-        ,accept: 'file'
-        ,multiple: true
-        ,auto: false
-        ,bindAction: '#testListAction'
-        ,choose: function(obj){
+        , url: 'https://httpbin.org/post' //改成您自己的上传接口
+        , accept: 'file'
+        , multiple: true
+        , auto: false
+        , bindAction: '#testListAction'
+        , choose: function (obj) {
             var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
             //读取本地文件
-            obj.preview(function(index, file, result){
-                var tr = $(['<tr id="upload-'+ index +'">'
-                    ,'<td>'+ file.name +'</td>'
-                    ,'<td>'+ (file.size/1024).toFixed(1) +'kb</td>'
-                    ,'<td>等待上传</td>'
-                    ,'<td>'
-                    ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
-                    ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
-                    ,'</td>'
-                    ,'</tr>'].join(''));
-
+            obj.preview(function (index, file, result) {
+                var tr = $(['<tr id="upload-' + index + '">'
+                    , '<td>' + file.name + '</td>'
+                    , '<td>' + (file.size / 1024).toFixed(1) + 'kb</td>'
+                    , '<td>等待上传</td>'
+                    , '<td>'
+                    , '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                    , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                    , '</td>'
+                    , '</tr>'].join(''));
                 //单个重传
-                tr.find('.demo-reload').on('click', function(){
+                tr.find('.demo-reload').on('click', function () {
                     obj.upload(index, file);
                 });
-
                 //删除
-                tr.find('.demo-delete').on('click', function(){
+                tr.find('.demo-delete').on('click', function () {
                     delete files[index]; //删除对应的文件
                     tr.remove();
                     uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
                 });
-
                 demoListView.append(tr);
             });
         }
-        ,done: function(res, index, upload){
-            if(res.files.file){ //上传成功
-                var tr = demoListView.find('tr#upload-'+ index)
-                    ,tds = tr.children();
+        , done: function (res, index, upload) {
+            if (res.files.file) { //上传成功
+                var tr = demoListView.find('tr#upload-' + index)
+                    , tds = tr.children();
                 tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
                 tds.eq(3).html(''); //清空操作
                 return delete this.files[index]; //删除文件队列已经上传成功的文件
             }
             this.error(index, upload);
         }
-        ,error: function(index, upload){
-            var tr = demoListView.find('tr#upload-'+ index)
-                ,tds = tr.children();
+        , error: function (index, upload) {
+            var tr = demoListView.find('tr#upload-' + index)
+                , tds = tr.children();
             tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
             tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
         }
     });
-
-    layui.use(['form', 'layedit', 'laydate'], function(){
+    layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
-            ,layer = layui.layer
-            ,layedit = layui.layedit
-            ,laydate = layui.laydate;
-
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
         //日期
         laydate.render({
             elem: '#date'
@@ -290,62 +285,55 @@
         laydate.render({
             elem: '#date1'
         });
-
         //创建一个编辑器
         var editIndex = layedit.build('LAY_demo_editor');
-
         //自定义验证规则
         form.verify({
-            title: function(value){
-                if(value.length < 5){
+            title: function (value) {
+                if (value.length < 5) {
                     return '标题至少得5个字符啊';
                 }
             }
-            ,pass: [
+            , pass: [
                 /^[\S]{6,12}$/
-                ,'密码必须6到12位，且不能出现空格'
+                , '密码必须6到12位，且不能出现空格'
             ]
-            ,content: function(value){
+            , content: function (value) {
                 layedit.sync(editIndex);
             }
         });
-
         //监听指定开关
-        form.on('switch(switchTest)', function(data){
-            layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
                 offset: '6px'
             });
             layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
         });
-
         //监听提交
-        form.on('submit(demo1)', function(data){
+        form.on('submit(demo1)', function (data) {
             layer.alert("提交成功！请在页面下方查看分析结果", {
                 title: '提示'
             })
             return false;
         });
-
         //表单赋值
-        layui.$('#LAY-component-form-setval').on('click', function(){
+        layui.$('#LAY-component-form-setval').on('click', function () {
             form.val('example', {
                 "username": "贤心" // "name": "value"
-                ,"password": "123456"
-                ,"interest": 1
-                ,"like[write]": true //复选框选中状态
-                ,"close": true //开关状态
-                ,"sex": "女"
-                ,"desc": "我爱 layui"
+                , "password": "123456"
+                , "interest": 1
+                , "like[write]": true //复选框选中状态
+                , "close": true //开关状态
+                , "sex": "女"
+                , "desc": "我爱 layui"
             });
         });
-
         //表单取值
-        layui.$('#LAY-component-form-getval').on('click', function(){
+        layui.$('#LAY-component-form-getval').on('click', function () {
             var data = form.val('example');
             alert("提交成功！请在页面下方查看分析结果")
             //alert(JSON.stringify(data));
         });
-
     });
 </script>
 </div>

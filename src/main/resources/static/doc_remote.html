@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>智音医疗系统-医生端</title>
+    <title>医生端-远程医疗</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -77,15 +77,15 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">病例管理</a>
                     <dl class="layui-nav-child">
-                        <dd class="layui-this" ><a href="doctor.html">病例表</a></dd>
+                        <dd ><a href="doctor.html">病例表</a></dd>
                         <dd><a href="doc_upload.html">肺音分析</a></dd>
                         <dd><a href="doc_final.html">最终病例</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
+                <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">远程医疗</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="doc_remote.html">远程病例</a></dd>
+                        <dd class="layui-this" ><a href="doc_remote.html">远程病例</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -95,18 +95,18 @@
     <div class="layui-body" style="bottom: 34px;margin-left: 200px;width: 87%;">
         <!-- 内容主体区域 -->
 <!--        <div style="width: 100%;height: 30px;line-height: 30px;font-weight: 600;font-size: 20px">病例表</div>-->
-        <blockquote class="layui-elem-quote" style="margin-bottom: 0">病例表</blockquote>
+        <blockquote class="layui-elem-quote" style="margin-bottom: 0">远程医疗</blockquote>
         <table class="layui-hide" id="test" lay-filter="test" style="margin-top: 0px"></table>
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
                 <button class="layui-btn layui-btn-sm" lay-event="getCheckData">查看详情</button>
 <!--                <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">选中数目</button>-->
-                <button class="layui-btn layui-btn-sm" onclick="notice()">新建病例</button>
+<!--                <button class="layui-btn layui-btn-sm" onclick="notice()">新建病例</button>-->
             </div>
         </script>
         <script type="text/html" id="barDemo">
             <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
-            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+<!--            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
             <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="voice" >肺音</a>
         </script>
 
@@ -202,7 +202,7 @@
 
         table.render({
             elem: '#test'
-            ,url:'./data/demo.json'
+            ,url:'./data/remote.json'
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
                 title: '提示'
@@ -214,7 +214,7 @@
                 {type: 'checkbox', fixed: 'left'}
                 ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
                 ,{field:'username', title:'患者姓名', width:120, edit: 'text'}
-                ,{field:'doctor', title:'诊断医生', width:120, edit: 'text'}
+                ,{field:'hospital', title:'所属医院', width:180, edit: 'text', sort: true}
                 ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
                 ,{field:'old', title:'年龄', width:80, edit: 'text', sort: true}
                 ,{field:'sign', title:'症状'}

@@ -5,20 +5,20 @@
     <title>新用户注册</title>
     <script src="js/jquery-3.4.1.min.js"></script>
     <style type="text/css">
-        body{
+        body {
             margin: 0;
             overflow: hidden;
             background-image: url("img/index01.png");
         }
-        .welcome{
+        .welcome {
             margin: 0 auto;
             width: 980px;
             height: 450px;
         }
-        .pic{
-            background-image: url("img/index03.png"),url("img/index02.png");
-            background-size: 80%,100%;
-            background-position: center,center;
+        .pic {
+            background-image: url("img/index03.png"), url("img/index02.png");
+            background-size: 80%, 100%;
+            background-position: center, center;
             background-repeat: no-repeat;
             height: 100%;
             width: 50%;
@@ -30,7 +30,7 @@
             box-shadow: 1px 1px 20px #ccc;
             float: left;
         }
-        .inputArea{
+        .inputArea {
             width: 49%;
             height: 100%;
             background-color: white;
@@ -42,31 +42,30 @@
             vertical-align: middle;
             text-align: center;
         }
-        .title{
+        .title {
             font-size: 28px;
             font-weight: 600;
             margin-top: 10%;
         }
-        .box input{
+        .box input {
             width: 55%;
             height: 20px;
             line-height: 20px;
             margin: 0 auto;
             border-radius: 30px;
-            border: 2px solid rgb(225,225,225);
+            border: 2px solid rgb(225, 225, 225);
             padding: 12px 16px;
             padding-left: 50px;
-            outline:none;
+            outline: none;
             margin-top: 30px;
             color: grey;
             font-size: 16px;
         }
-
-        input::-webkit-input-placeholder{
-            color:#bfbfbf;
+        input::-webkit-input-placeholder {
+            color: #bfbfbf;
         }
-        .btn{
-            background-color: rgb(8,141,239);
+        .btn {
+            background-color: rgb(8, 141, 239);
             color: white;
             width: 50%;
             height: 60px;
@@ -78,12 +77,12 @@
             cursor: pointer;
             font-weight: 600;
         }
-        .btn:hover{
+        .btn:hover {
             background-color: rgb(7, 204, 239);
             color: white;
         }
-        .finish{
-            background-color: rgb(225,225,225);
+        .finish {
+            background-color: rgb(225, 225, 225);
             color: white;
             width: 85%;
             height: 40px;
@@ -93,8 +92,8 @@
             cursor: pointer;
             margin-top: 20px;
         }
-        .ok{
-            background-color: rgb(8,141,239);
+        .ok {
+            background-color: rgb(8, 141, 239);
             color: white;
             width: 85%;
             height: 40px;
@@ -104,49 +103,49 @@
             cursor: pointer;
             margin-top: 20px;
         }
-        .ok:hover{
+        .ok:hover {
             background-color: rgb(7, 204, 239);
         }
-        .question{
+        .question {
             margin-top: 30px;
             font-size: 22px;
             font-weight: 600;
         }
-        .item{
+        .item {
             margin-top: 15px;
             width: 100%;
             text-align: left;
         }
-        .continue{
+        .continue {
             width: 70%;
             margin: 0 auto;
             height: 275px;
             padding-right: 10px;
         }
-        .in{
+        .in {
             margin-top: 0px;
             height: 30px;
             width: 100%;
             border: 0;
             outline: none;
-            border-bottom: 2px solid rgb(225,225,225);
+            border-bottom: 2px solid rgb(225, 225, 225);
         }
-        .sco::-webkit-scrollbar {/*滚动条整体样式*/
-            width: 8px;     /*高宽分别对应横竖滚动条的尺寸*/
+        .sco::-webkit-scrollbar { /*滚动条整体样式*/
+            width: 8px; /*高宽分别对应横竖滚动条的尺寸*/
             height: 1px;
         }
-        .sco::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+        .sco::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: rgb(8,141,239);
+            background-color: rgb(8, 141, 239);
             /*background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);*/
         }
-        .sco::-webkit-scrollbar-track {/*滚动条里面轨道*/
-            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        .sco::-webkit-scrollbar-track { /*滚动条里面轨道*/
+            -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
             background: #EDEDED;
         }
-        .con{
+        .con {
             color: white;
-            background-color: rgb(8,141,239);
+            background-color: rgb(8, 141, 239);
             width: 90px;
             height: 30px;
             float: right;
@@ -156,29 +155,29 @@
             outline: none;
             cursor: pointer;
         }
-        .con:hover{
+        .con:hover {
             background-color: rgb(7, 204, 239);
         }
         /*隐藏input*/
-        label.bui-radios-label input[type="radio"]{
+        label.bui-radios-label input[type="radio"] {
             position: absolute;
             opacity: 0;
             visibility: hidden;
         }
         /*自定义radio*/
-        label.bui-radios-label .bui-radios{
+        label.bui-radios-label .bui-radios {
             display: inline-block;
             position: relative;
             width: 13px;
             height: 13px;
             background-color: #fff;
-            border: 1px solid rgb(225,225,225);
+            border: 1px solid rgb(225, 225, 225);
             border-radius: 50%;
             vertical-align: -2px;
             margin-right: 5px;
         }
         /*单选框选中后，自定义radio的样式*/
-        label.bui-radios-label input[type="radio"]:checked + .bui-radios:after{
+        label.bui-radios-label input[type="radio"]:checked + .bui-radios:after {
             position: absolute;
             content: "";
             width: 7px;
@@ -188,133 +187,133 @@
             top: 3px;
             left: 3px;
         }
-        label.bui-radios-label input[type="radio"]:checked + .bui-radios{
-            background-color: rgb(8,141,239);
-            border:1px solid rgb(8,141,239);
+        label.bui-radios-label input[type="radio"]:checked + .bui-radios {
+            background-color: rgb(8, 141, 239);
+            border: 1px solid rgb(8, 141, 239);
         }
-        label.bui-radios-label input[type="radio"]:disabled + .bui-radios{
+        label.bui-radios-label input[type="radio"]:disabled + .bui-radios {
             background-color: #e8e8e8;
-            border:1px solid #979797;
+            border: 1px solid #979797;
         }
-        label.bui-radios-label input[type="radio"]:disabled:checked + .bui-radios:after{
+        label.bui-radios-label input[type="radio"]:disabled:checked + .bui-radios:after {
             background-color: #c1c1c1;
         }
         /*自定义radio的过渡效果*/
-        label.bui-radios-label.bui-radios-anim .bui-radios{
-            -webkit-transition:background-color ease-out .5s;
-            transition:background-color ease-out .5s;
+        label.bui-radios-label.bui-radios-anim .bui-radios {
+            -webkit-transition: background-color ease-out .5s;
+            transition: background-color ease-out .5s;
         }
-        #txt{
-            color:#979797;
+        #txt {
+            color: #979797;
             font-size: 16px;
         }
     </style>
 </head>
 <body>
-    <div style="height: 150px;width: 100%;">
-    </div>
-    <div class="welcome">
-        <div class="pic"></div>
-        <div class="inputArea">
-            <div class="title">
-                <span>注册</span>
+<div style="height: 150px;width: 100%;">
+</div>
+<div class="welcome">
+    <div class="pic"></div>
+    <div class="inputArea">
+        <div class="title">
+            <span>注册</span>
+        </div>
+        <div class="box" id="begin">
+            <div class="question">
+                请选择您的身份
             </div>
-            <div class="box" id="begin">
-                <div class="question">
-                    请选择您的身份
-                </div>
-                <div style="display: inline-block;width: 100%;">
-                    <button class="btn" onclick="type1()">医 生</button>
-                </div>
-                <div style="display: inline-block;width: 100%;">
-                    <button class="btn" onclick="type2()">个 人</button>
-                </div>
+            <div style="display: inline-block;width: 100%;">
+                <button class="btn" onclick="type1()">医 生</button>
             </div>
-            <div id="continue" class="continue sco" style="display: none">
-                <div class="item" >
-                    <div style="float: left;width: 100%;font-weight: 600">
-                        用户名 <span style="color: red">*</span>
-                    </div>
-                    <input placeholder="请输入用户名" class="in"/>
-                </div>
-                <div class="item">
-                    <div style="float: left;width: 100%;font-weight: 600">
-                        真实姓名 <span style="color: red">*</span>
-                    </div>
-                    <input placeholder="请输入真实姓名" class="in"/>
-                </div>
-                <div class="item">
-                    <div style="float: left;width: 100%;font-weight: 600">
-                        性别 <span style="color: red">*</span>
-                    </div>
-                    <input placeholder="请输入性别" class="in"/>
-                </div>
-                <div class="item">
-                    <div style="float: left;width: 100%;font-weight: 600">
-                        邮箱 <span style="color: red">*</span>
-                    </div>
-                    <input placeholder="请输入邮箱" class="in"/>
-                </div>
-                <div class="item">
-                    <button class="con" onclick="nex()">下一步</button>
-                </div>
+            <div style="display: inline-block;width: 100%;">
+                <button class="btn" onclick="type2()">个 人</button>
             </div>
-            <div class="continue" id="end" style="display: none">
-                <div class="item">
-                    <div style="float: left;width: 100%;font-weight: 600">
-                        设置密码 <span style="color: red">*</span>
-                    </div>
-                    <input placeholder="请输入密码" type="password" class="in"/>
+        </div>
+        <div id="continue" class="continue sco" style="display: none">
+            <div class="item">
+                <div style="float: left;width: 100%;font-weight: 600">
+                    用户名 <span style="color: red">*</span>
                 </div>
-                <div class="item">
-                    <div style="float: left;width: 100%;font-weight: 600">
-                        确认密码 <span style="color: red">*</span>
-                    </div>
-                    <input placeholder="请再次输入" type="password" class="in"/>
+                <input placeholder="请输入用户名" class="in"/>
+            </div>
+            <div class="item">
+                <div style="float: left;width: 100%;font-weight: 600">
+                    真实姓名 <span style="color: red">*</span>
                 </div>
-                <div class="item" style="margin-top: 25px">
-                    <label class="bui-radios-label bui-radios-anim">
-                        <input type="radio" name="sex" id="radio" onclick="button()"><i class="bui-radios"></i>
-                        <span id="txt">我已经阅读并接受用户使用协议</span>
-                    </label>
+                <input placeholder="请输入真实姓名" class="in"/>
+            </div>
+            <div class="item">
+                <div style="float: left;width: 100%;font-weight: 600">
+                    性别 <span style="color: red">*</span>
                 </div>
-                <div class="item" style="text-align: center">
-                    <button class="finish" onclick="finish()" disabled="disabled">完 成</button>
+                <input placeholder="请输入性别" class="in"/>
+            </div>
+            <div class="item">
+                <div style="float: left;width: 100%;font-weight: 600">
+                    邮箱 <span style="color: red">*</span>
                 </div>
-                <div class="item" style="margin-top: 35px">
-                    <button class="con" style="float: unset" onclick="pre()">上一步</button>
+                <input placeholder="请输入邮箱" class="in"/>
+            </div>
+            <div class="item">
+                <button class="con" onclick="nex()">下一步</button>
+            </div>
+        </div>
+        <div class="continue" id="end" style="display: none">
+            <div class="item">
+                <div style="float: left;width: 100%;font-weight: 600">
+                    设置密码 <span style="color: red">*</span>
                 </div>
+                <input placeholder="请输入密码" type="password" class="in"/>
+            </div>
+            <div class="item">
+                <div style="float: left;width: 100%;font-weight: 600">
+                    确认密码 <span style="color: red">*</span>
+                </div>
+                <input placeholder="请再次输入" type="password" class="in"/>
+            </div>
+            <div class="item" style="margin-top: 25px">
+                <label class="bui-radios-label bui-radios-anim">
+                    <input type="radio" name="sex" id="radio" onclick="button()"><i class="bui-radios"></i>
+                    <span id="txt">我已经阅读并接受用户使用协议</span>
+                </label>
+            </div>
+            <div class="item" style="text-align: center">
+                <button class="finish" onclick="finish()" disabled="disabled">完 成</button>
+            </div>
+            <div class="item" style="margin-top: 35px">
+                <button class="con" style="float: unset" onclick="pre()">上一步</button>
             </div>
         </div>
     </div>
+</div>
 </body>
 <script>
-    document.body.onselectstart = function() {
+    document.body.onselectstart = function () {
         return false;
     };
     function type1() {
-        $("#continue").css("display","block");
-        $("#begin").css("display","none");
+        $("#continue").css("display", "block");
+        $("#begin").css("display", "none");
     }
     function type2() {
-        $("#continue").css("display","block");
-        $("#begin").css("display","none");
+        $("#continue").css("display", "block");
+        $("#begin").css("display", "none");
     }
     function nex() {
-        $("#end").css("display","block");
-        $("#continue").css("display","none");
+        $("#end").css("display", "block");
+        $("#continue").css("display", "none");
     }
     function pre() {
-        $("#continue").css("display","block");
-        $("#end").css("display","none");
+        $("#continue").css("display", "block");
+        $("#end").css("display", "none");
     }
     function button() {
-        $(".finish").attr("disabled",false);
+        $(".finish").attr("disabled", false);
         $(".finish").addClass("ok");
         $(".finish").removeClass("finish");
     }
     function finish() {
-        window.location.href="index.html";
+        window.location.href = "index.html";
     }
 </script>
 </html>

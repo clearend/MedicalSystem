@@ -85,7 +85,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">远程医疗</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">远程病例</a></dd>
+                        <dd><a href="doc_remote.html">远程病例</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -102,7 +102,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">患者姓名<span style="color: red "> *</span></label>
                 <div class="layui-input-block">
-                    <input disabled type="text" name="username" lay-verify="required" lay-reqtext="姓名是必填项" placeholder="王某某" autocomplete="off" class="layui-input">
+                    <input disabled type="text" name="username" lay-verify="required" lay-reqtext="姓名是必填项" placeholder="李先生" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -128,7 +128,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">主诉<span style="color: red "> *</span></label>
                 <div class="layui-input-block">
-                    <input disabled type="tel" name="phone" lay-verify="required|phone" placeholder="出现咽干、咽痒、打喷嚏、鼻塞咳嗽、流眼泪、头痛等症状" autocomplete="off" class="layui-input">
+                    <input disabled type="tel" name="phone" lay-verify="required|phone" placeholder="出现咽干、咽痒、打喷嚏、鼻塞咳嗽等症状" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -146,7 +146,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">肺音诊断<span style="color: red "> *</span></label>
                 <div class="layui-input-block">
-                    <input disabled type="tel" name="phone" lay-verify="required|phone" placeholder="轻度肺炎" autocomplete="off" class="layui-input">
+                    <input disabled type="tel" name="phone" lay-verify="required|phone" placeholder="哮喘" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -161,7 +161,7 @@
                     <input type="tel" name="phone" lay-verify="required|phone" placeholder="请填入医师姓名" autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <button type="button" class="layui-btn layui-btn-disabled" id="testListAction" style="margin-left: 600px" onclick="alert('最终病例已存档！')">确认提交</button>
+            <button type="button" class="layui-btn " id="testListAction" style="margin-left: 600px" onclick="alert('最终病例已存档！');window.location.href = './doctor.html'">确认提交</button>
         </form>
     </div>
 
